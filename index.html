@@ -20,7 +20,7 @@
 			</div>
 
 			<div class="py-3 col-md-6">
-				<img class="img-fluid rounded" id="urlImg">
+				<img class="img-fluid rounded w-100" id="urlImg">
 			</div>
 		</div>
 
@@ -32,8 +32,9 @@
 
 <script type="text/javascript">
 
-/*
-*/
+var defaultImage = 'https://mapandan.gov.ph/wp-content/uploads/2018/03/no_image.jpg';
+document.getElementById("urlImg").src = defaultImage;
+
 function getImgUrl(text){
 	if (text !== '' || text !== ' ' || text !== null) {
 		document.getElementById("urlSource").href = text;	
@@ -51,7 +52,7 @@ function getImgUrl(text){
 
 			document.getElementById("urlImg").src = "https://lh3.googleusercontent.com/p/"+ qSub +"=s0";
 		}
-		else {
+		else if (params.get("imagekey") !== null) {
 			let q = params.get("imagekey"); // is the number 123
 			let qSub = q.substr(8, q.length-1);
 
@@ -59,6 +60,12 @@ function getImgUrl(text){
 
 			document.getElementById("urlImg").src = "https://lh3.googleusercontent.com/p/"+ qSub +"=s0";	
 		}
+		else {
+			document.getElementById("urlImg").src = defaultImage;
+		}	
+	}
+	else {
+		document.getElementById("urlImg").src = defaultImage;
 	}
 }
 
