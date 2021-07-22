@@ -20,7 +20,7 @@
 			</div>
 
 			<div class="py-3 col-md-6">
-				<img class="img-fluid rounded w-100" id="urlImg" src="https://mapandan.gov.ph/wp-content/uploads/2018/03/no_image.jpg">
+				<img class="img-fluid rounded w-100" id="urlImg">
 			</div>
 		</div>
 
@@ -60,11 +60,11 @@ function getImgUrl(text){
 			document.getElementById("urlImg").src = "https://lh3.googleusercontent.com/p/"+ qSub +"=s0";	
 		}
 		else {
-			document.getElementById("urlImg").src = defaultImage;
+			document.getElementById("urlImg").src = '';
 		}	
 	}
 	else {
-		document.getElementById("urlImg").src = defaultImage;
+		document.getElementById("urlImg").src = '';
 	}
 }
 
