@@ -1,75 +1,83 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<title>Download GMaps Image</title>
+	<title>GMaps IMG</title>
+	
+    <link rel="manifest" href="manifest.json">
+	<!-- <link rel="stylesheet" href="css/style.css"> -->
+	<link rel="icon" href="favicon.ico" type="image/x-icon" />
+	<link rel="apple-touch-icon" href="images/hello-icon-152.png">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="theme-color" content="white"/>
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="apple-mobile-web-app-title" content="GMaps IMG">
+	<meta name="msapplication-TileImage" content="images/hello-icon-144.png">
+	<meta name="msapplication-TileColor" content="#FFFFFF">
 
-	<link rel="stylesheet" type="text/css" href="https://cdn.kukode.in/bootstrap/5/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css">
 </head>
 <body class="bg-light">
 
-<section>
-	<div class="container my-5">
-		<div class="row mx-1 bg-white shadow-sm rounded">
-			<div class="pt-3 pb-md-3 pb-0 col-md-6">
-				<input type="url" class="form-control" id="getUrl" placeholder="Url" onchange="getImgUrl(this.value)">
+    <section>
+        <div class="container my-5">
+            <div class="row mx-1 bg-white shadow-sm rounded">
+                <div class="pt-3 pb-md-3 pb-0 col-md-6">
+                    <input type="url" class="form-control" id="getUrl" placeholder="Url" onchange="getImgUrl(this.value)">
+    
+                    <a id="urlSource" class="d-none">urlSource</a>
+                </div>
+    
+                <div class="py-3 col-md-6">
+                    <img class="img-fluid rounded w-100" id="urlImg">
+                    <div class="d-grid gap-2 d-none">
+                        <a id="downLink" href="" class="btn btn-primary btn-block" download="img.jpg">Download Your File</a>
+                    </div>
+                </div>
+            </div>
+    
+        </div>
+    </section>
 
-				<a id="urlSource" class="d-none">urlSource</a>
-			</div>
+	<script src="js/main.js"></script>
+    <script type="text/javascript">
+        
+        var defaultImage = 'https://mapandan.gov.ph/wp-content/uploads/2018/03/no_image.jpg';
+        
+        function getImgUrl(text){
+            if (text !== '' || text !== ' ' || text !== null) {
+                document.getElementById("urlSource").href = text;	
+        
+                var anchor = document.getElementById("urlSource");
+                var queryString = anchor.search; // Returns:'?q=123'
+        
+                // Further parsing:
+                let params = new URLSearchParams(queryString);
+                if (params.get("image_key") !== null) {
+                    let q = params.get("image_key"); // is the number 123
+                    let qSub = q.substr(8, q.length-1);
 
-			<div class="py-3 col-md-6">
-				<img class="img-fluid rounded w-100" id="urlImg">
-			</div>
-		</div>
-
-	</div>
-</section>
-
-<script type="text/javascript" src="https://cdn.kukode.in/jquery/v3.5/jquery.min.js"></script>
-<script type="text/javascript" src="https://cdn.kukode.in/bootstrap/5/js/bootstrap.bundle.min.js"></script>
-
-<script type="text/javascript">
-
-var defaultImage = 'https://mapandan.gov.ph/wp-content/uploads/2018/03/no_image.jpg';
-
-function getImgUrl(text){
-	if (text !== '' || text !== ' ' || text !== null) {
-		document.getElementById("urlSource").href = text;	
-
-		var anchor = document.getElementById("urlSource");
-		var queryString = anchor.search; // Returns:'?q=123'
-
-		// Further parsing:
-		let params = new URLSearchParams(queryString);
-		if (params.get("image_key") !== null) {
-			let q = params.get("image_key"); // is the number 123
-			let qSub = q.substr(8, q.length-1);
-
-			// document.getElementById("demo").innerHTML = qSub;
-
-			document.getElementById("urlImg").src = "https://lh3.googleusercontent.com/p/"+ qSub +"=s0";
-		}
-		else if (params.get("imagekey") !== null) {
-			let q = params.get("imagekey"); // is the number 123
-			let qSub = q.substr(8, q.length-1);
-
-			// document.getElementById("demo").innerHTML = qSub;
-
-			document.getElementById("urlImg").src = "https://lh3.googleusercontent.com/p/"+ qSub +"=s0";	
-		}
-		else {
-			document.getElementById("urlImg").src = '';
-		}	
-	}
-	else {
-		document.getElementById("urlImg").src = '';
-	}
-}
-
-
-</script>
-
+                    document.getElementById("urlImg").src = "https://lh3.googleusercontent.com/p/"+ qSub +"=s0";
+                }
+                else if (params.get("imagekey") !== null) {
+                    let q = params.get("imagekey"); // is the number 123
+                    let qSub = q.substr(8, q.length-1);
+        
+                    document.getElementById("urlImg").src = "https://lh3.googleusercontent.com/p/"+ qSub +"=s0";
+                }
+                else {
+                    document.getElementById("urlImg").src = '';
+                }	
+            }
+            else {
+                document.getElementById("urlImg").src = '';
+            }
+        }
+        
+        
+        </script>
 </body>
 </html>
